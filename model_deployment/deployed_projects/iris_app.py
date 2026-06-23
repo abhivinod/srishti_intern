@@ -6,6 +6,14 @@ import pickle
 import json
 from PIL import Image
 import io
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+joblib_path=os.path.join(BASE_DIR,"models","iris_model.joblib")
+pickle_path=os.path.join(BASE_DIR,"models","iris_model.pickle")
+info_path=os.path.join(BASE_DIR,"models","iris_model_info.json")
+features_path=os.path.join(BASE_DIR,"models","iris_feature_ranges.json")
+print(BASE_DIR)
 
 # Set page config
 st.set_page_config(
@@ -57,9 +65,9 @@ def load_model(format_type='joblib'):
     """Load the model from the specified format"""
     try:
         if format_type == 'joblib':
-            model = joblib.load('models/iris_model.joblib')
+            model = joblib.load(joblib_path)
         elif format_type == 'pickle':
-            with open('models/iris_model.pickle', 'rb') as f:
+            with open(pickle_path, 'rb') as f:
                 model = pickle.load(f)
         return model
     except Exception as e:
@@ -70,7 +78,7 @@ def load_model(format_type='joblib'):
 def load_model_info():
     """Load model metadata"""
     try:
-        with open('models/iris_model_info.json', 'r') as f:
+        with open(info_path, 'r') as f:
             return json.load(f)
     except Exception as e:
         st.error(f"Error loading model info: {e}")
@@ -80,7 +88,7 @@ def load_model_info():
 def load_feature_ranges():
     """Load feature ranges for sliders"""
     try:
-        with open('models/iris_feature_ranges.json', 'r') as f:
+        with open(features_path, 'r') as f:
             return json.load(f)
     except:
         # Default ranges if file doesn't exist
