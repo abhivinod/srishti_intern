@@ -14,6 +14,11 @@ pickle_path=os.path.join(BASE_DIR,"models","iris_model.pickle")
 info_path=os.path.join(BASE_DIR,"models","iris_model_info.json")
 features_path=os.path.join(BASE_DIR,"models","iris_feature_ranges.json")
 print(BASE_DIR)
+image_urls={
+    'setosa':'https://raw.githubusercontent.com/abhivinod/srishti_intern/main/model_deployment/deployed_projects/assets/setosa.jpg',
+    'virginica':'https://raw.githubusercontent.com/abhivinod/srishti_intern/main/model_deployment/deployed_projects/assets/virginica.jpg',
+    'versicolor':'https://raw.githubusercontent.com/abhivinod/srishti_intern/main/model_deployment/deployed_projects/assets/versicolor.jpg'
+}
 
 # Set page config
 st.set_page_config(
@@ -217,9 +222,8 @@ if st.button("🎯 Predict Species", type="primary", use_container_width=True):
             predicted_class = model_info['target_names'][prediction[0]]
             
             # Display results
-            
             st.markdown(f'<div class="prediction-card">', unsafe_allow_html=True)
-            st.image(f"./assets/{predicted_class}.jpg")
+            st.image(image_urls[predicted_class],width=300)
             st.markdown('</div>', unsafe_allow_html=True)
             st.markdown(f"### 🌟 Prediction Result")
             st.markdown(f"**Predicted Species:** **{predicted_class}**")
