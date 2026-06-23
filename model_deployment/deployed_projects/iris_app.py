@@ -209,7 +209,10 @@ if st.button("🎯 Predict Species", type="primary", use_container_width=True):
             predicted_class = model_info['target_names'][prediction[0]]
             
             # Display results
-            st.markdown('<div class="prediction-card">', unsafe_allow_html=True)
+            
+            st.markdown(f'<div class="prediction-card">', unsafe_allow_html=True)
+            st.image(f"./assets/{predicted_class}.jpg")
+            st.markdown('</div>', unsafe_allow_html=True)
             st.markdown(f"### 🌟 Prediction Result")
             st.markdown(f"**Predicted Species:** **{predicted_class}**")
             
